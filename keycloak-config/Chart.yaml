@@ -1,0 +1,5 @@
+apiVersion: v2
+name: Keycloak config
+description: Keycloak config helm chart
+type: application
+version: 0.1.0

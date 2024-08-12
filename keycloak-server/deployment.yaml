@@ -1,0 +1,24 @@
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: Keycloak
+metadata:
+  name: example-kc
+spec:
+  instances: 1
+  http:
+    httpEnabled: true
+  hostname:
+    strict: false
+  additionalOptions:
+    - name: log-level
+      value: debug
+  # configuration for a custom initial admin user with the username "admin" and password "password"
+  # note: Do not use this in production for obvious reasons, this is for testing only
+  unsupported:
+    podTemplate:
+      spec:
+        containers:
+          - env:
+            - name: KEYCLOAK_ADMIN
+              value: admin
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: password

@@ -1,0 +1,17 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: kind-test
+nodes:
+- role: control-plane
+  kubeadmConfigPatches:
+    - | 
+      kind: InitConfiguration
+      nodeRegistration:
+        kubeletExtraArgs:
+          node-labels: "ingress-ready=true"
+      etcd:
+        local:
+          extraArgs:
+            unsafe-no-fsync: "true"
+      networking:
+        serviceSubnet: 10.0.0.0/16
