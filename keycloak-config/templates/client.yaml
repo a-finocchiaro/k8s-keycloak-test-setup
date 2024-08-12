@@ -9,9 +9,9 @@ spec:
     clientId: backend-service-confidential
     realmId: test-realm  # Replace with your realm ID
     serviceAccountsEnabled: true  # Enable service accounts for machine-to-machine communication
-  providerConfigRef:
-    name: "keycloak-provider-config"
     clientSecretSecretRef:
       key: client-secret
       name: backend-service-confidential-client-secret
       namespace: keycloak
+  providerConfigRef:
+    name: "keycloak-provider-config"
