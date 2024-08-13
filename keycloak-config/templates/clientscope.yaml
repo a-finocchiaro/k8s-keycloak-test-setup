@@ -1,0 +1,41 @@
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: ClientScope
+metadata:
+  name: example-client-scope
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    realmId: test-realm
+    description: "client scope from k8s"
+    name: k8s-client-scope
+  providerConfigRef:
+    name: "keycloak-provider-config"
+---
+apiVersion: client.keycloak.crossplane.io/v1alpha1
+kind: ProtocolMapper
+metadata:
+  name: example-role-mapper
+spec:
+  forProvider:
+    realmId: test-realm
+    clientScopeIdRef:
+      name: example-client-scope
+      policy:
+        resolution: "Required"
+    # Config values here are not documented anywhere (not even in keycloak API docs). Easiest way to find these
+    # is to set them in the UI on a dummy scope, then look at the "network" tab in the browser devtools. The 
+    # GET request will include the values.
+    config:
+      introspection.token.claim: "true"
+      multivalued: "true"
+      userinfo.token.claim: "false"
+      id.token.claim: "false"
+      lightweight.claim: "false"
+      access.token.claim: "true"
+      claim.name: "roles"
+      jsonType.label: "String"
+    name: role-mapper
+    protocol: openid-connect
+    protocolMapper: oidc-usermodel-realm-role-mapper
+  providerConfigRef:
+    name: keycloak-provider-config

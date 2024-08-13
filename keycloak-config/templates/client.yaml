@@ -15,3 +15,23 @@ spec:
       namespace: keycloak
   providerConfigRef:
     name: "keycloak-provider-config"
+---
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: ClientDefaultScopes
+metadata:
+  name: backend-service-confidential-client
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: backend-service-confidential-client
+      policy:
+        resolution: "Required"
+    realmId: test-realm 
+
+    # All scopes not listed here will be changed to "optional"
+    defaultScopes:
+      - k8s-client-scope
+
+  providerConfigRef:
+    name: "keycloak-provider-config"
