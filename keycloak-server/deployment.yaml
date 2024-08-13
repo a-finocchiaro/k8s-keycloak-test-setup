@@ -8,6 +8,9 @@ spec:
     httpEnabled: true
   hostname:
     strict: false
+  features:
+    enabled:
+      - admin-fine-grained-authz
   additionalOptions:
     - name: log-level
       value: debug

@@ -4,7 +4,7 @@ metadata:
   name: user-with-password
 spec:
   forProvider:
-    realmId: "basic-realm"
+    realmId: "test-realm"
     username: "userwithpassword"
     email: "testuser@example.com"
     emailVerified: true

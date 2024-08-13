@@ -1,0 +1,27 @@
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: test-role  # The name of the role in Kubernetes
+spec:
+  forProvider:
+    realmId: "test-realm"  # The ID of the realm where this role will be created
+    name: "test-role"  # The name of the role in Keycloak
+  providerConfigRef:
+    name: "keycloak-provider-config"  # Reference to the ProviderConfig resource
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: composite-role
+spec:
+  forProvider:
+    realmId: "test-realm"
+    name: "composite-role"
+
+    # create a composite role by inheriting from another role
+    compositeRolesRefs:
+      - name: test-role
+        policy:
+          resolution: "Required"
+  providerConfigRef:
+    name: "keycloak-provider-config"
