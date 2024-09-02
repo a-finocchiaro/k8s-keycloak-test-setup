@@ -1,0 +1,23 @@
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: ClientRolePolicy
+metadata:
+  name: admin-client-role-policy
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    realmId: test-realm
+    description: "Policy created from K8s"
+    name: admin-policy
+
+    # BUG: these are not required in the CRD, but they should be required
+    # decisionStrategy: "UNANIMOUS"
+    logic: "POSITIVE"
+    role:
+      - id: role-admin
+        required: true
+
+    # BUG: This should also allow a resourceServerIdRef
+    resourceServerId: "30bfb3fd-1cf0-4026-99fa-a34ce8c17c19"
+    type: "role"
+  providerConfigRef:
+    name: "keycloak-provider-config"

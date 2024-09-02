@@ -1,0 +1,11 @@
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Permissions
+metadata:
+  name: k8s-admins-grp-permissions
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    realmId: test-realm
+    name: k8s-admins-grp-permissions
+  providerConfigRef:
+    name: "keycloak-provider-config"

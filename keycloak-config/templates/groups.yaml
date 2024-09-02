@@ -1,0 +1,35 @@
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: k8s-superusers
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: K8sSuperUsers
+    realmId: test-realm
+  providerConfigRef:
+    name: "keycloak-provider-config"
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: k8s-admins
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: K8sAdmins
+    realmId: test-realm
+  providerConfigRef:
+    name: "keycloak-provider-config"
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: k8s-users
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: K8sUsers
+    realmId: test-realm
+providerConfigRef:
+    name: "keycloak-provider-config"
